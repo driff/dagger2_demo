@@ -1,6 +1,6 @@
 package com.driff.apps.advancedandroid.trending;
 
-import com.driff.apps.advancedandroid.data.RepoRequester;
+import com.driff.apps.advancedandroid.data.RepoRepository;
 import com.driff.apps.advancedandroid.di.ScreenScope;
 import com.driff.apps.advancedandroid.model.Repo;
 
@@ -13,17 +13,17 @@ import javax.inject.Inject;
 class TrendingReposPresenter implements RepoAdapter.RepoClickedListener{
 
     private final TrendingReposViewModel viewModel;
-    private final RepoRequester requester;
+    private final RepoRepository repoRepository;
 
     @Inject
-    TrendingReposPresenter(TrendingReposViewModel viewModel, RepoRequester requester){
+    TrendingReposPresenter(TrendingReposViewModel viewModel, RepoRepository repoRepository){
         this.viewModel = viewModel;
-        this.requester = requester;
+        this.repoRepository = repoRepository;
         loadRepos();
     }
 
     private void loadRepos() {
-        requester.getTrendingRepos()
+        repoRepository.getTrendingRepos()
                 .doOnSubscribe(__->viewModel.loadingUpdated().accept(true))
                 .doOnEvent((d, t)->viewModel.loadingUpdated().accept(false))
                 .subscribe(viewModel.reposUpdated(), viewModel.onError());

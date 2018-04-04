@@ -68,7 +68,7 @@ class RepoDetailsViewModel {
             detailStateRelay.accept(
                 RepoDetailState.builder()
                     .loading(false)
-                    .errorRes(R.string.api_error_repos_single_repo)
+                    .errorRes(R.string.api_error_single_repo)
                     .build()
             );
         };

@@ -2,6 +2,7 @@ package com.driff.apps.advancedandroid.data;
 
 import android.util.Log;
 
+import com.driff.apps.advancedandroid.model.Contributor;
 import com.driff.apps.advancedandroid.model.Repo;
 
 import java.util.List;
@@ -25,16 +26,19 @@ public class RepoRequester {
         this.service = service;
     }
 
-    public Single<List<Repo>> getTrendingRepos(){
+    Single<List<Repo>> getTrendingRepos(){
         Log.w(this.getClass().getName(), "Request!");
         return service.getTrendingRepos()
-                .map(TrendingReposResponse::repos)
+                .map(TrendingReposResponse::repos);
+    }
+
+    Single<Repo> getRepo(String repoOwner, String repoName){
+        return service.getRepo(repoOwner, repoName)
                 .subscribeOn(Schedulers.io());
     }
 
-    public Single<Repo> getRepo(String repoOwner, String repoName){
-        return service.getRepo(repoOwner, repoName)
-                .subscribeOn(Schedulers.io());
+    Single<List<Contributor>> getContributors(String url){
+        return service.getContributor(url);
     }
 
 }

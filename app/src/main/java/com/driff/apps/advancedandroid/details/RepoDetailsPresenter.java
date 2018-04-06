@@ -1,5 +1,7 @@
 package com.driff.apps.advancedandroid.details;
 
+import android.annotation.SuppressLint;
+
 import com.driff.apps.advancedandroid.data.RepoRepository;
 import com.driff.apps.advancedandroid.di.ScreenScope;
 
@@ -9,6 +11,7 @@ import javax.inject.Named;
 @ScreenScope
 public class RepoDetailsPresenter {
 
+    @SuppressLint("CheckResult")
     @Inject
     RepoDetailsPresenter(@Named("repo_owner") String repoOwner, @Named("repo_name") String repoName,
             RepoRepository repoRepository, RepoDetailsViewModel viewModel){
